@@ -231,7 +231,7 @@ window.addEventListener('load', () => {
   }
   function loadCanvas() {
     const image = new Image();
-    image.src = localStorage.getItem('canvtasData');
+    image.src = localStorage.getItem('canvasData');
     image.onload = function () {
       ctx.drawImage(image, 0, 0);
     };
