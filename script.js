@@ -1,3 +1,7 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable max-len */
+/* eslint-disable no-plusplus */
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 window.addEventListener('load', () => {
@@ -25,15 +29,45 @@ window.addEventListener('load', () => {
     prevColor = localStorage.getItem('prevColor');
     prevColorNode.value = prevColor;
   }
+  /* Bucket */
+  function paintBucket(e) {
+    const canvasWidth = 32;
+    const startX = Math.floor(e.offsetX / RESOLUTIONRATE);
+    const startY = Math.floor(e.offsetY / RESOLUTIONRATE);
+    const pixelStack = [[startX, startY]];
+    const imgData = ctx.getImageData(Math.floor(e.offsetX / RESOLUTIONRATE), Math.floor(e.offsetY / RESOLUTIONRATE), 1, 1);
+    const startColor = [imgData.data[0], imgData.data[1], imgData.data[2]];
+    console.log(startColor);
+  }
   /* Permissions for draw */
-  function startDraw() {
+  function startDraw(e) {
     painting = true;
   }
 
   function endDraw() {
     painting = false;
   }
-
+  function colorPickerInstrument(e) {
+    const rgbToHex = function (rgb) {
+      let hex = Number(rgb).toString(16);
+      if (hex.length < 2) {
+        hex = `0${hex}`;
+      }
+      return hex;
+    };
+    const fullColorHex = function (r, g, b) {
+      const red = rgbToHex(r);
+      const green = rgbToHex(g);
+      const blue = rgbToHex(b);
+      return red === '00' && green === '00' && blue === '00' ? 'ffffff' : red + green + blue;
+    };
+    const getColor = ctx.getImageData(Math.floor(e.offsetX / RESOLUTIONRATE), Math.floor(e.offsetY / RESOLUTIONRATE), 1, 1);
+    currentColor = `#${fullColorHex(getColor.data[0], getColor.data[1], getColor.data[2])}`;
+    ctx.fillStyle = currentColor;
+    currentColorNode.value = currentColor;
+    ctx.save();
+    localStorage.setItem('currentColor', currentColor);
+  }
   /* First color (current color) picker */
   function currentColorPicker(e) {
     currentColor = e.target.value;
@@ -45,7 +79,35 @@ window.addEventListener('load', () => {
     prevColor = e.target.value;
     localStorage.setItem('prevColor', prevColor);
   }
-
+  /* Bresenghem */
+  function bresenhamLine(x1, y1, x2, y2) {
+    const dx = Math.abs(x2 - x1);
+    const sx = x1 < x2 ? 1 : -1;
+    const dy = -Math.abs(y2 - y1);
+    const sy = y1 < y2 ? 1 : -1;
+    let e2;
+    let er = dx + dy;
+    let end = false;
+    ctx.fillStyle = currentColor;
+    ctx.beginPath();
+    while (!end) {
+      ctx.rect(x1, y1, 1, 1);
+      if (x1 === x2 && y1 === y2) {
+        end = true;
+      } else {
+        e2 = 2 * er;
+        if (e2 > dy) {
+          er += dy;
+          x1 += sx;
+        }
+        if (e2 < dx) {
+          er += dx;
+          y1 += sy;
+        }
+      }
+    }
+    ctx.fill();
+  }
   /* Draw line */
   function drawLine(e) {
     if (painting) {
@@ -55,6 +117,7 @@ window.addEventListener('load', () => {
       ctx.stroke();
     }
   }
+
   /* Remove all events */
   const eventList = [];
   function removeEvents() {
@@ -65,10 +128,23 @@ window.addEventListener('load', () => {
       return canvas;
     });
   }
-
-  let currentInstruction;
   let pencil;
   let bucket;
+  let colorPicker;
+  let bresenham;
+  let globalX1;
+  let globalY1;
+  let globalX2;
+  let globalY2;
+  function startPos(eDown) {
+    globalX1 = Math.floor(eDown.offsetX / RESOLUTIONRATE);
+    globalY1 = Math.floor(eDown.offsetY / RESOLUTIONRATE);
+  }
+  function endPos(eUp) {
+    globalX2 = Math.floor(eUp.offsetX / RESOLUTIONRATE);
+    globalY2 = Math.floor(eUp.offsetY / RESOLUTIONRATE);
+    bresenhamLine(globalX1, globalY1, globalX2, globalY2);
+  }
   /* Do something according to option */
   function chosenElement() {
     // Clean all active items and remove events, before add new
@@ -76,9 +152,9 @@ window.addEventListener('load', () => {
       item.classList.remove('active');
     });
     // Add new events
-    currentInstruction = this;
     this.classList.add('active');
     if (this.id === 'pencil') {
+      removeEvents();
       eventList.length = 0;
       canvas.addEventListener('mousedown', startDraw);
       canvas.addEventListener('mouseup', endDraw);
@@ -87,13 +163,26 @@ window.addEventListener('load', () => {
       ctx.save();
       localStorage.setItem('ctxBackup', JSON.stringify(ctx));
     }
-    if (this.id === 'paintBucket') {
+    if (this.id === 'bresenham') {
       removeEvents();
+      eventList.length = 0;
+      canvas.addEventListener('mousedown', startPos);
+      canvas.addEventListener('mouseup', endPos);
+      eventList.push({ startPos }, { endPos });
+    }
+    if (this.id === 'colorPicker') {
+      removeEvents();
+      eventList.length = 0;
+      canvas.addEventListener('mousedown', colorPickerInstrument);
+      eventList.push({ colorPickerInstrument });
+    }
+    if (this.id === 'paintBucket') {
+      let b = 5;
     }
   }
-
   /* Init keyboard events */
   function keyBoardEvents(e) {
+    console.log(e);
     if (e.keyCode === 80) {
       pencil = document.getElementById('pencil');
       chosenElement.apply(pencil);
@@ -101,6 +190,10 @@ window.addEventListener('load', () => {
     if (e.keyCode === 66) {
       bucket = document.getElementById('paintBucket');
       chosenElement.apply(bucket);
+    }
+    if (e.keyCode === 67) {
+      colorPicker = document.getElementById('colorPicker');
+      chosenElement.apply(colorPicker);
     }
   }
 
@@ -110,6 +203,10 @@ window.addEventListener('load', () => {
     pencil.addEventListener('click', chosenElement.bind(pencil));
     bucket = document.getElementById('paintBucket');
     bucket.addEventListener('click', chosenElement.bind(bucket));
+    colorPicker = document.getElementById('colorPicker');
+    colorPicker.addEventListener('click', chosenElement.bind(colorPicker));
+    bresenham = document.getElementById('bresenham');
+    bresenham.addEventListener('click', chosenElement.bind(bresenham));
   }
 
   /* Event listeners */

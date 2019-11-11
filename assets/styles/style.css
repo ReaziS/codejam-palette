@@ -202,6 +202,7 @@ header .options {
 }
 
 .draw-wrapper .canvas {
+  border: 1px solid black;
   height: 512px;
   width: 512px;
 }
