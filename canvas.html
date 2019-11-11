@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/styles/style.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <header>
+        <div class="burger">
+            <img src="assets/images/Shape.svg" alt="">
+            <span class="header__title">CodeJam - Pallete</span>
+        </div>
+        <div class="options"><img src="assets/images/menu icon.svg" alt=""></div>
+    </header>
+    <section class="draw-wrapper">
+        <div class="instruments-wrapper">
+                <div class="instruments-main" id="instruments-panel">
+                    <div class="instrument paint-bucket" id="paintBucket">
+                        <img src="assets/images/Vector.svg" alt="">
+                        <span>Paint bucket</span>
+                    </div>
+                    <div class="instrument choose-color">
+                        <img src="assets/images/Vector2.svg" alt="">
+                        <span>Choose color</span>
+                    </div>
+                    <div class="instrument pencil" id="pencil">
+                        <img src="assets/images/Vector2.svg" alt="">
+                        <span>Choose color</span>
+                    </div>
+                    <div class="instrument move">
+                        <img src="assets/images/Move.svg" alt="">
+                        <span>Move</span>
+                    </div>
+                    <div class="instrument transform">
+                        <img src="assets/images/Vector1.svg" alt="">
+                        <span>Transform</span>
+                    </div>
+                </div>
+                <div class="instruments-sub">
+                    <label class="instrument" id="currentColorWrapper">
+                        <input id="currentColor" type="color">
+                        <span>Current color</span>
+                    </label>
+                    <label class="instrument" id="prevColorWrapper">
+                        <input id="prevColor" type="color">
+                        <span>Prev color</span>
+                    </label>
+                    <!--<label class="instrument">
+                        <input id="color" type="color">
+                        <span>red</span>
+                    </label>
+                    <label class="instrument">
+                        <input id="color" type="color">
+                        <span>blu</span>
+                    </label> -->
+                    
+                </div>
+            </div>
+            <div class="canvas">
+                <canvas id="canv" width="32" height="32">
+                </canvas>
+            </div>
+        
+    </section>
+    
+
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
