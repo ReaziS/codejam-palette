@@ -4,6 +4,9 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
+/* module.exports = function test() {
+  return 32;
+}; */
 window.addEventListener('load', () => {
   /* Canvas */
   const canvas = document.getElementById('canv');
@@ -29,15 +32,38 @@ window.addEventListener('load', () => {
     prevColor = localStorage.getItem('prevColor');
     prevColorNode.value = prevColor;
   }
+  /* First color (current color) picker */
+  function currentColorPicker(e) {
+    prevColorNode.value = currentColor;
+    prevColor = currentColor;
+    localStorage.setItem('currentColor', currentColor);
+    currentColor = e.target.value;
+    localStorage.setItem('prevColor', currentColor);
+  }
+
+  /* Second color (prev color) picker */
+  function prevColorPicker(e) {
+    e.preventDefault();
+    const tempColor = currentColor;
+    currentColorNode.value = prevColor;
+    currentColor = prevColor;
+    prevColorNode.value = tempColor;
+    prevColor = tempColor;
+    localStorage.setItem('prevColor', tempColor);
+    localStorage.setItem('currentColor', currentColor);
+  }
   /* Bucket */
   function paintBucket(e) {
-    const canvasWidth = 32;
+    /* const canvasWidth = 32;
     const startX = Math.floor(e.offsetX / RESOLUTIONRATE);
     const startY = Math.floor(e.offsetY / RESOLUTIONRATE);
     const pixelStack = [[startX, startY]];
     const imgData = ctx.getImageData(Math.floor(e.offsetX / RESOLUTIONRATE), Math.floor(e.offsetY / RESOLUTIONRATE), 1, 1);
     const startColor = [imgData.data[0], imgData.data[1], imgData.data[2]];
-    console.log(startColor);
+    console.log(startColor); */
+    ctx.fillStyle = currentColor;
+    ctx.rect(0, 0, CANVASSIZE, CANVASSIZE);
+    ctx.fill();
   }
   /* Permissions for draw */
   function startDraw(e) {
@@ -67,17 +93,6 @@ window.addEventListener('load', () => {
     currentColorNode.value = currentColor;
     ctx.save();
     localStorage.setItem('currentColor', currentColor);
-  }
-  /* First color (current color) picker */
-  function currentColorPicker(e) {
-    currentColor = e.target.value;
-    localStorage.setItem('currentColor', currentColor);
-  }
-
-  /* Second color (prev color) picker */
-  function prevColorPicker(e) {
-    prevColor = e.target.value;
-    localStorage.setItem('prevColor', prevColor);
   }
   /* Bresenghem */
   function bresenhamLine(x1, y1, x2, y2) {
@@ -111,6 +126,7 @@ window.addEventListener('load', () => {
   /* Draw line */
   function drawLine(e) {
     if (painting) {
+      ctx.beginPath();
       ctx.fillStyle = currentColor;
       // eslint-disable-next-line max-len
       ctx.fillRect(Math.floor(e.offsetX / RESOLUTIONRATE), Math.floor(e.offsetY / RESOLUTIONRATE), 1, 1);
@@ -160,8 +176,6 @@ window.addEventListener('load', () => {
       canvas.addEventListener('mouseup', endDraw);
       canvas.addEventListener('mousemove', drawLine);
       eventList.push({ startDraw }, { endDraw }, { drawLine });
-      ctx.save();
-      localStorage.setItem('ctxBackup', JSON.stringify(ctx));
     }
     if (this.id === 'bresenham') {
       removeEvents();
@@ -177,7 +191,10 @@ window.addEventListener('load', () => {
       eventList.push({ colorPickerInstrument });
     }
     if (this.id === 'paintBucket') {
-      let b = 5;
+      removeEvents();
+      eventList.length = 0;
+      canvas.addEventListener('mousedown', paintBucket);
+      eventList.push({ paintBucket });
     }
   }
   /* Init keyboard events */
@@ -208,10 +225,25 @@ window.addEventListener('load', () => {
     bresenham = document.getElementById('bresenham');
     bresenham.addEventListener('click', chosenElement.bind(bresenham));
   }
-
+  function saveCanvas() {
+    const toData = canvas.toDataURL('image/jpeg', 1.0);
+    localStorage.setItem('canvasData', toData);
+  }
+  function loadCanvas() {
+    const image = new Image();
+    image.src = localStorage.getItem('canvtasData');
+    image.onload = function () {
+      ctx.drawImage(image, 0, 0);
+    };
+  }
+  /* Events for load and save state */
+  const save = document.getElementById('save');
+  save.addEventListener('click', saveCanvas);
+  const load = document.getElementById('load');
+  load.addEventListener('click', loadCanvas);
   /* Event listeners */
   currentColorNode.addEventListener('change', currentColorPicker);
-  prevColorNode.addEventListener('change', prevColorPicker);
+  prevColorNode.addEventListener('click', prevColorPicker);
   document.addEventListener('keydown', keyBoardEvents);
   initElements();
 });
