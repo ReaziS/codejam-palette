@@ -49,10 +49,6 @@ header .options {
           align-items: center;
 }
 
-.active {
-  background: rgba(0, 0, 0, 0.3);
-}
-
 .draw-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -75,7 +71,8 @@ header .options {
   -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
   z-index: 1;
-  margin-bottom: 30px;
+  padding: 20px 0;
+  list-style-type: none;
 }
 
 .draw-wrapper .instruments-wrapper .instruments-main .instrument {
@@ -85,13 +82,16 @@ header .options {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 15px 65px 15px 20px;
+  padding: 15px 40px;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 24px;
   color: rgba(0, 0, 0, 0.541327);
+  background: #ffffff;
+  border: none;
+  width: 100%;
 }
 
 .draw-wrapper .instruments-wrapper .instruments-main .instrument:hover {
@@ -105,13 +105,13 @@ header .options {
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.draw-wrapper .instruments-wrapper .instruments-main .instrument:last-child {
-  margin-bottom: 20px;
-}
-
 .draw-wrapper .instruments-wrapper .instruments-main .instrument span {
   display: block;
   padding-left: 35px;
+}
+
+.draw-wrapper .instruments-wrapper .instruments-main .instrument.active {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .draw-wrapper .instruments-wrapper .instruments-sub {

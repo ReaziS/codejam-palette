@@ -18,32 +18,44 @@
     </header>
     <section class="draw-wrapper">
         <div class="instruments-wrapper">
-                <div class="instruments-main" id="instruments-panel">
-                    <div class="instrument paint-bucket" id="paintBucket">
-                        <img src="assets/images/Vector.svg" alt="">
-                        <span>Paint bucket</span>
-                    </div>
-                    <div class="instrument color-picker" id="colorPicker">
-                        <img src="assets/images/Vector2.svg" alt="">
-                        <span>Choose color</span>
-                    </div>
-                    <div class="instrument pencil" id="pencil">
-                        <img src="assets/images/icon-copy.svg" alt="">
-                        <span>Pencil</span>
-                    </div>
-                    <div class="instrument" id="bresenham">
-                        <img src="assets/images/icon-copy.svg" alt="">
-                        <span>Bresenham</span>
-                    </div>
-                    <div class="instrument move">
-                        <img src="assets/images/Move.svg" alt="">
-                        <span>Move</span>
-                    </div>
-                    <div class="instrument transform">
-                        <img src="assets/images/Vector1.svg" alt="">
-                        <span>Transform</span>
-                    </div>
-                </div>
+                <ul class="instruments-main" id="instruments-panel">
+                    <li>
+                        <button class="instrument paint-bucket" type="submit" id="paintBucket">
+                            <img src="assets/images/Vector.svg" alt="">
+                            <span>Paint bucket</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="instrument color-picker" type="submit" id="colorPicker">
+                            <img src="assets/images/Vector2.svg" alt="">
+                            <span>Choose color</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="instrument pencil" type="submit" id="pencil">
+                            <img src="assets/images/icon-copy.svg" alt="">
+                            <span>Pencil</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="instrument" type="submit" id="bresenham">
+                            <img src="assets/images/icon-copy.svg" alt="">
+                            <span>Bresenham</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="instrument move" type="submit" id="move">
+                            <img src="assets/images/Move.svg" alt="">
+                            <span>Move</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="instrument" type="submit" id="transform">
+                            <img src="assets/images/Vector1.svg" alt="">
+                            <span>Transform</span>
+                        </button>
+                    </li>
+                </ul>
                 <div class="instruments-sub">
                     <label class="instrument" id="currentColorWrapper">
                         <input id="currentColor" type="color">
