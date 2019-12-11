@@ -1,0 +1,220 @@
+body {
+  margin: 0 auto;
+  max-width: 1440px;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0 auto 75px auto;
+  padding: 0 15px;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+}
+
+header .burger {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 12px 0;
+}
+
+header .burger .header__title {
+  display: block;
+  padding-left: 30px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+header .options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.draw-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.draw-wrapper .instruments-wrapper {
+  width: 18%;
+  position: relative;
+  margin-left: 25px;
+  min-width: 230px;
+}
+
+.draw-wrapper .instruments-wrapper .instruments-main {
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+  z-index: 1;
+  padding: 20px 0;
+  list-style-type: none;
+}
+
+.draw-wrapper .instruments-wrapper .instruments-main .instrument {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 15px 40px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 0.541327);
+  background: #ffffff;
+  border: none;
+  width: 100%;
+}
+
+.draw-wrapper .instruments-wrapper .instruments-main .instrument:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.1);
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+}
+
+.draw-wrapper .instruments-wrapper .instruments-main .instrument:nth-child(2) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.draw-wrapper .instruments-wrapper .instruments-main .instrument span {
+  display: block;
+  padding-left: 35px;
+}
+
+.draw-wrapper .instruments-wrapper .instruments-main .instrument.active {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.draw-wrapper .instruments-wrapper .instruments-sub {
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+  margin-bottom: 100px;
+}
+
+.draw-wrapper .instruments-wrapper .instruments-sub .instrument {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 15px 65px 15px 20px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 0.541327);
+}
+
+.draw-wrapper .instruments-wrapper .instruments-sub .instrument:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.1);
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+}
+
+.draw-wrapper .instruments-wrapper .instruments-sub .instrument:nth-child(2) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.draw-wrapper .instruments-wrapper .instruments-sub .instrument:last-child {
+  margin-bottom: 20px;
+}
+
+.draw-wrapper .instruments-wrapper .instruments-sub .instrument .color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: red;
+}
+
+.draw-wrapper .instruments-wrapper .instruments-sub .instrument span {
+  display: block;
+  padding-left: 35px;
+}
+
+.draw-wrapper .instruments-wrapper .instruments-change-img {
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+  margin-bottom: 30px;
+}
+
+.draw-wrapper .instruments-wrapper .instruments-change-img .instrument {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 15px 65px 15px 20px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 0.541327);
+}
+
+.draw-wrapper .instruments-wrapper .instruments-change-img .instrument:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.1);
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+}
+
+.draw-wrapper .instruments-wrapper .instruments-change-img .instrument:last-child {
+  margin-bottom: 20px;
+}
+
+.draw-wrapper .instruments-wrapper .instruments-change-img .instrument span {
+  display: block;
+  padding-left: 35px;
+}
+
+.draw-wrapper .canvas {
+  border: 1px solid black;
+  height: 512px;
+  width: 512px;
+}
+
+.draw-wrapper .canvas canvas {
+  -ms-interpolation-mode: nearest-neighbor;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: -o-pixelated;
+      image-rendering: pixelated;
+  height: 512px;
+  width: 512px;
+  z-index: -1;
+}
+/*# sourceMappingURL=style.css.map */

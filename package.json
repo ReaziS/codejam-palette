@@ -1,0 +1,29 @@
+{
+  "name": "codejam-palette",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "dependencies": {
+    "canvas": "^2.6.0",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "jsdom": "15.2.1",
+    "jsdom-global": "3.0.2"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ReaziS/codejam-palette.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ReaziS/codejam-palette/issues"
+  },
+  "homepage": "https://github.com/ReaziS/codejam-palette#readme"
+}
